@@ -1,15 +1,35 @@
-from window import Window
+from graphics import Window
 from cell import Cell
 
-win = Window(800, 600)
 
-cells = []
+def main():
+    win = Window(800, 600)
 
-for i in range(10):
-	for j in range(10):
-		cells.append(Cell(True, True, True, True, i * 80, j * 60, (i + 1) * 80, (j + 1) * 60, win))
+    c1 = Cell(win)
+    c1.has_right_wall = False
+    c1.draw(50, 50, 100, 100)
 
-for cell in cells:
-	cell.draw()
+    c2 = Cell(win)
+    c2.has_left_wall = False
+    c2.has_bottom_wall = False
+    c2.draw(100, 50, 150, 100)
 
-win.wait_for_close()
+    c1.draw_move(c2)
+
+    c3 = Cell(win)
+    c3.has_top_wall = False
+    c3.has_right_wall = False
+    c3.draw(100, 100, 150, 150)
+
+    c2.draw_move(c3)
+
+    c4 = Cell(win)
+    c4.has_left_wall = False
+    c4.draw(150, 100, 200, 150)
+
+    c3.draw_move(c4, True)
+
+    win.wait_for_close()
+
+
+main()
